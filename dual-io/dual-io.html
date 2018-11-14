@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>io simple</title>
+  </head>
+
+  <body>
+    <script>
+      function calc(num) {
+        var importObj = {
+          env: { bar: arg => console.log('Got it: '+arg) }
+        };
+        WebAssembly.instantiateStreaming(fetch('dual-io.wasm'),importObj).then(obj => 
+          obj.instance.exports.foo(num)
+        ).then(res => 
+          document.getElementById('out').innerHTML = res
+        );
+      }
+    </script>
+    <input id="in" />
+    <button onclick="calc(document.getElementById('in').value)" >Go</button>
+    <div id="out"></div>
+  </body>
+
+</html>

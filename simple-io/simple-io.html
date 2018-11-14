@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>io simple</title>
+  </head>
+
+  <body>
+    <script>
+      function calc(num) {
+        var wasmCode = new Uint8Array([0,97,115,109,1,0,0,0,1,134,128,128,128,0,1,96,1,127,1,127,3,130,128,128,128,0,1,0,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,1,6,129,128,128,128,0,0,7,144,128,128,128,0,2,6,109,101,109,111,114,121,2,0,3,102,111,111,0,0,10,141,128,128,128,0,1,135,128,128,128,0,0,32,0,65,1,106,11]);
+        var m = new WebAssembly.Instance(new WebAssembly.Module(wasmCode));
+        document.getElementById('out').innerHTML = m.exports.foo(num);
+      }
+    </script>
+    <input id="in" />
+    <button onclick="calc(document.getElementById('in').value)" >Go</button>
+    <div id="out"></div>
+  </body>
+
+</html>
